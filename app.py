@@ -3,7 +3,7 @@ import requests, os
 
 app = Flask(__name__)
 
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+GROQ_API_KEY = os.environ.get("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")
 
 SYSTEM_PROMPT = """
 You are a hacker-style AI assistant.
