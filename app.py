@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import requests, os
 
 app = Flask(__name__)
+CORS(app)   # 🔥 THIS LINE FIXES THE PROBLEM
 
-GROQ_API_KEY = os.environ.get("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")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 
 SYSTEM_PROMPT = """
 You are a hacker-style AI assistant.
@@ -18,7 +20,8 @@ def home():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    user_msg = request.json.get("message")
+    data = request.get_json(force=True)
+    user_msg = data.get("message", "")
 
     payload = {
         "model": "mixtral-8x7b-32768",
